@@ -1,0 +1,1167 @@
+[
+  {
+    "id": "react-001",
+    "question": "Что возвращает React хук useState?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Только значение состояния", "isCorrect": false },
+      {
+        "text": "Только функцию обновления состояния",
+        "isCorrect": false
+      },
+      {
+        "text": "Массив, где первый элемент - значение, второй - функция обновления",
+        "isCorrect": true
+      },
+      {
+        "text": "Объект со свойствами value и setValue",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "useState возвращает массив из двух элементов: текущее значение состояния и функцию для его обновления. Деструктуризация массива позволяет давать любые имена этим переменным.",
+    "tags": ["react", "hooks", "useState"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb", "yandex"],
+    "complexity": 1,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useState"
+  },
+  {
+    "id": "react-002",
+    "question": "Что делает StrictMode в React?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Ускоряет рендеринг приложения", "isCorrect": false },
+      {
+        "text": "Включает строгую типизацию TypeScript",
+        "isCorrect": false
+      },
+      {
+        "text": "Помогает обнаружить побочные эффекты и устаревшие API",
+        "isCorrect": true
+      },
+      { "text": "Автоматически оптимизирует бандл", "isCorrect": false }
+    ],
+    "explanation": "StrictMode — инструмент для обнаружения потенциальных проблем. Он вызывает рендер компонентов дважды в development, чтобы выявить побочные эффекты, и предупреждает об использовании устаревших API.",
+    "tags": ["react", "strictmode", "development"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/StrictMode"
+  },
+  {
+    "id": "react-003",
+    "question": "Какой тип следует использовать для пропсов children в TypeScript?",
+    "questionType": "text",
+    "answers": [
+      { "text": "string", "isCorrect": false },
+      { "text": "React.ReactNode", "isCorrect": true },
+      { "text": "JSX.Element", "isCorrect": false },
+      { "text": "React.ReactElement", "isCorrect": false }
+    ],
+    "explanation": "React.ReactNode — самый широкий тип, включающий все возможные значения, которые могут быть дочерними элементами: строки, числа, элементы, массивы, фрагменты, порталы и т.д.",
+    "tags": ["react", "typescript", "props"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example"
+  },
+  {
+    "id": "react-004",
+    "question": "Найдите ошибку в коде использования useEffect",
+    "questionType": "find_bug",
+    "codeSnippet": "```typescript\nconst MyComponent = () => {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    document.title = `Count: ${count}`;\n    // Ошибка здесь\n    return () => {\n      document.title = 'React App';\n    };\n  }, []);\n\n  return <button onClick={() => setCount(c => c + 1)}>Click</button>;\n};\n```",
+    "answers": [
+      { "text": "Нет ошибки, код рабочий", "isCorrect": false },
+      {
+        "text": "useEffect не должен изменять document.title",
+        "isCorrect": false
+      },
+      {
+        "text": "В зависимостях useEffect должен быть count",
+        "isCorrect": true
+      },
+      {
+        "text": "Нужно использовать useLayoutEffect вместо useEffect",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Если эффект использует значение count, он должен быть указан в массиве зависимостей. Без этого useEffect будет использовать начальное значение count (0) при каждом вызове, даже когда count изменяется.",
+    "tags": ["react", "hooks", "useEffect", "typescript"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useEffect"
+  },
+  {
+    "id": "react-005",
+    "question": "Что такое реконсиляция (reconciliation) в React?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Процесс примирения состояния между сервером и клиентом",
+        "isCorrect": false
+      },
+      {
+        "text": "Алгоритм определения изменений в Virtual DOM",
+        "isCorrect": true
+      },
+      { "text": "Синхронизация данных с Redux store", "isCorrect": false },
+      { "text": "Процесс обновления реального DOM", "isCorrect": false }
+    ],
+    "explanation": "Реконсиляция — это алгоритм, который React использует для сравнения предыдущего и нового Virtual DOM деревьев, чтобы определить минимальный набор изменений для применения к реальному DOM.",
+    "tags": ["react", "virtual-dom", "reconciliation"],
+    "direction": "frontend",
+    "companies": ["yandex", "t-bank"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/learn/preserving-and-resetting-state"
+  },
+  {
+    "id": "react-006",
+    "question": "Какой хук следует использовать для оптимизации дорогих вычислений?",
+    "questionType": "text",
+    "answers": [
+      { "text": "useMemo", "isCorrect": true },
+      { "text": "useCallback", "isCorrect": false },
+      { "text": "useEffect", "isCorrect": false },
+      { "text": "useReducer", "isCorrect": false }
+    ],
+    "explanation": "useMemo кэширует результат вычислений и пересчитывает его только при изменении зависимостей. Это предотвращает выполнение дорогих операций при каждом рендере.",
+    "tags": ["react", "hooks", "performance", "useMemo"],
+    "direction": "frontend",
+    "companies": ["wb", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useMemo"
+  },
+  {
+    "id": "react-007",
+    "question": "Какое ключевое слово используется для создания контекста в TypeScript?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\n// Какой тип нужно указать?\nconst ThemeContext = createContext<______>({ theme: 'light' });\n```",
+    "answers": [
+      { "text": "ThemeContext", "isCorrect": false },
+      { "text": "typeof ThemeContext", "isCorrect": false },
+      {
+        "text": "Тип значения контекста (например: { theme: string })",
+        "isCorrect": true
+      },
+      { "text": "any", "isCorrect": false }
+    ],
+    "explanation": "При создании контекста в TypeScript нужно указать тип значения, которое будет храниться в контексте. Это обеспечивает типизацию при использовании useContext.",
+    "tags": ["react", "context", "typescript"],
+    "direction": "frontend",
+    "companies": ["t-bank", "yandex"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context"
+  },
+  {
+    "id": "react-008",
+    "question": "Когда компонент перерендеривается?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Только при изменении его состояния", "isCorrect": false },
+      { "text": "Только при изменении пропсов", "isCorrect": false },
+      {
+        "text": "При изменении состояния, пропсов или контекста",
+        "isCorrect": true
+      },
+      { "text": "Только при вызове forceUpdate", "isCorrect": false }
+    ],
+    "explanation": "Компонент перерендеривается когда: 1) изменяется его состояние (useState/useReducer), 2) изменяются пропсы, 3) изменяется значение используемого контекста, 4) перерендеривается родительский компонент.",
+    "tags": ["react", "rendering", "performance"],
+    "direction": "frontend",
+    "companies": ["wb", "tinkoff", "yandex"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/learn/render-and-commit"
+  },
+  {
+    "id": "react-009",
+    "question": "Что возвращает хук useRef?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Объект со свойством .value", "isCorrect": false },
+      { "text": "Объект со свойством .current", "isCorrect": true },
+      { "text": "Текущее значение ссылки", "isCorrect": false },
+      { "text": "Функцию для обновления ссылки", "isCorrect": false }
+    ],
+    "explanation": "useRef возвращает объект с единственным свойством .current, которое инициализируется переданным аргументом и может быть изменено. Изменение .current не вызывает ререндер.",
+    "tags": ["react", "hooks", "useRef"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 1,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useRef"
+  },
+  {
+    "id": "react-010",
+    "question": "Как правильно типизировать компонент с дженериками в TypeScript?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ninterface ListProps<T> {\n  items: T[];\n  renderItem: (item: T) => React.ReactNode;\n}\n\nconst List = <T,>({ items, renderItem }: ListProps<T>) => {\n  return <div>{items.map(renderItem)}</div>;\n};\n```",
+    "answers": [
+      {
+        "text": "Код содержит ошибку, нужно <T extends any>",
+        "isCorrect": false
+      },
+      {
+        "text": "Код содержит ошибку, нужно добавить запятую: <T,>",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": true },
+      {
+        "text": "Код содержит ошибку, дженерики не поддерживаются",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Код правильный. В TypeScript JSX нужно использовать <T,> синтаксис с запятой, чтобы отличать дженерик от JSX тега. Синтаксис уже присутствует в коде.",
+    "tags": ["react", "typescript", "generics"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase"
+  },
+  {
+    "id": "react-011",
+    "question": "Что делает React.memo?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Кэширует результат вычислений", "isCorrect": false },
+      { "text": "Запоминает состояние компонента", "isCorrect": false },
+      {
+        "text": "Предотвращает ререндер при неизменных пропсах",
+        "isCorrect": true
+      },
+      { "text": "Оптимизирует работу с памятью", "isCorrect": false }
+    ],
+    "explanation": "React.memo — это HOC, который мемоизирует компонент. Он предотвращает ререндер, если пропсы не изменились (сравниваются поверхностно или с помощью кастомной функции).",
+    "tags": ["react", "memo", "performance"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/memo"
+  },
+  {
+    "id": "react-012",
+    "question": "Как правильно обработать асинхронную операцию в useEffect?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nuseEffect(() => {\n  fetch('/api/data')\n    .then(res => res.json())\n    .then(data => setData(data));\n}, []);\n```",
+    "answers": [
+      { "text": "Код правильный", "isCorrect": false },
+      {
+        "text": "Нужно добавить очистку с AbortController",
+        "isCorrect": true
+      },
+      { "text": "Нужно использовать async/await", "isCorrect": false },
+      { "text": "Нужно вынести fetch из useEffect", "isCorrect": false }
+    ],
+    "explanation": "При выполнении асинхронных операций в useEffect важно отменять их при размонтировании компонента, чтобы предотвратить утечки памяти и установку состояния в размонтированном компоненте.",
+    "tags": ["react", "hooks", "useEffect", "async"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/learn/synchronizing-with-effects"
+  },
+  {
+    "id": "react-013",
+    "question": "Какой тип события в TypeScript для onChange инпута?",
+    "questionType": "text",
+    "answers": [
+      { "text": "React.ChangeEvent", "isCorrect": false },
+      { "text": "React.ChangeEvent<HTMLInputElement>", "isCorrect": true },
+      { "text": "React.InputEvent", "isCorrect": false },
+      { "text": "Event", "isCorrect": false }
+    ],
+    "explanation": "Для типизации события onChange нужно использовать React.ChangeEvent<HTMLInputElement>. Это обеспечивает доступ к event.target.value с правильным типом.",
+    "tags": ["react", "typescript", "events"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-014",
+    "question": "Что такое ленивая загрузка (lazy loading) в React?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Отложенная инициализация состояния", "isCorrect": false },
+      { "text": "Динамический импорт компонентов", "isCorrect": true },
+      { "text": "Медленная загрузка изображений", "isCorrect": false },
+      {
+        "text": "Отложенный рендеринг до взаимодействия",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Ленивая загрузка реализуется через React.lazy() и динамический импорт import(). Она позволяет разделить бандл и загружать компоненты только когда они нужны.",
+    "tags": ["react", "performance", "lazy-loading"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/lazy"
+  },
+  {
+    "id": "react-015",
+    "question": "Найдите ошибку в использовании useCallback",
+    "questionType": "find_bug",
+    "codeSnippet": "```typescript\nconst Parent = () => {\n  const [count, setCount] = useState(0);\n  \n  const handleClick = useCallback(() => {\n    console.log('Clicked:', count);\n  }, []);\n  \n  return <Child onClick={handleClick} />;\n};\n```",
+    "answers": [
+      { "text": "Нет ошибки", "isCorrect": false },
+      {
+        "text": "useCallback лишний, можно использовать обычную функцию",
+        "isCorrect": false
+      },
+      {
+        "text": "В зависимостях useCallback должен быть count",
+        "isCorrect": true
+      },
+      {
+        "text": "Нужно использовать useMemo вместо useCallback",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Если колбэк использует значение count, он должен быть в зависимостях useCallback. Иначе handleClick всегда будет ссылаться на начальное значение count (0).",
+    "tags": ["react", "hooks", "useCallback"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-016",
+    "question": "Как типизировать пропсы компонента в TypeScript?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\n// Выберите правильный вариант\ninterface ButtonProps {\n  onClick: __________;\n  children: React.ReactNode;\n}\n```",
+    "answers": [
+      { "text": "() => void", "isCorrect": false },
+      { "text": "(event: React.MouseEvent) => void", "isCorrect": false },
+      {
+        "text": "(event: React.MouseEvent<HTMLButtonElement>) => void",
+        "isCorrect": true
+      },
+      { "text": "Function", "isCorrect": false }
+    ],
+    "explanation": "Для кнопки следует использовать React.MouseEvent<HTMLButtonElement>, чтобы получить доступ к специфичным свойствам события и правильную типизацию event.target.",
+    "tags": ["react", "typescript", "props"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-017",
+    "question": "Что такое порталы (Portals) в React?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Способ передачи данных между компонентами",
+        "isCorrect": false
+      },
+      {
+        "text": "Механизм для рендера детей в DOM-узел вне родителя",
+        "isCorrect": true
+      },
+      { "text": "API для работы с геолокацией", "isCorrect": false },
+      { "text": "Способ организации маршрутизации", "isCorrect": false }
+    ],
+    "explanation": "Порталы позволяют рендерить дочерние элементы в DOM-узел, который находится вне DOM-иерархии родительского компонента. Полезно для модальных окон, тултипов.",
+    "tags": ["react", "portals", "dom"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react-dom/createPortal"
+  },
+  {
+    "id": "react-018",
+    "question": "Как работает batched updates в React 18?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Группировка нескольких обновлений состояния в один рендер",
+        "isCorrect": true
+      },
+      { "text": "Кэширование результатов рендера", "isCorrect": false },
+      { "text": "Пакетная загрузка ресурсов", "isCorrect": false },
+      { "text": "Оптимизация работы с сетью", "isCorrect": false }
+    ],
+    "explanation": "React 18 автоматически батчит все обновления состояния, происходящие в пределах одного события (клик, промис, таймаут), что уменьшает количество ререндеров.",
+    "tags": ["react", "react18", "performance"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/blog/2022/03/29/react-v18"
+  },
+  {
+    "id": "react-019",
+    "question": "Какой хук использовать для подписки на внешние store?",
+    "questionType": "text",
+    "answers": [
+      { "text": "useState", "isCorrect": false },
+      { "text": "useContext", "isCorrect": false },
+      { "text": "useSyncExternalStore", "isCorrect": true },
+      { "text": "useEffect", "isCorrect": false }
+    ],
+    "explanation": "useSyncExternalStore — хук, представленный в React 18, предназначенный для безопасной подписки на внешние источники данных (сторы, браузерные API).",
+    "tags": ["react", "hooks", "react18", "state-management"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useSyncExternalStore"
+  },
+  {
+    "id": "react-020",
+    "question": "Как правильно использовать useReducer с TypeScript?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ntype State = { count: number };\ntype Action = { type: 'increment' } | { type: 'decrement' };\n\nconst reducer = (state: State, action: Action): State => {\n  switch (action.type) {\n    case 'increment':\n      return { count: state.count + 1 };\n    case 'decrement':\n      return { count: state.count - 1 };\n    default:\n      return state;\n  }\n};\n\nconst [state, dispatch] = useReducer(reducer, { count: 0 });\n```",
+    "answers": [
+      { "text": "Нужно добавить throw в default case", "isCorrect": true },
+      {
+        "text": "Нужно указать тип для state в reducer",
+        "isCorrect": false
+      },
+      {
+        "text": "Нужно добавить break после каждого case",
+        "isCorrect": false
+      },
+      {
+        "text": "Код содержит ошибку, нужно использовать enum для action.type",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "В TypeScript хорошей практикой является выбрасывание ошибки в default case редюсера, чтобы TypeScript мог гарантировать, что все возможные action.type обработаны.",
+    "tags": ["react", "hooks", "useReducer", "typescript"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-021",
+    "question": "Что такое рефы (refs) и когда их использовать?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Для хранения состояния, которое не вызывает ререндер",
+        "isCorrect": false
+      },
+      { "text": "Для доступа к DOM элементам", "isCorrect": false },
+      {
+        "text": "Для сохранения значений между рендерами",
+        "isCorrect": false
+      },
+      { "text": "Все варианты верны", "isCorrect": true }
+    ],
+    "explanation": "Рефы используются для: 1) доступа к DOM элементам (фокус, измерения), 2) хранения мутабельных значений, которые не вызывают ререндер, 3) сохранения предыдущих значений, 4) интеграции с императивными библиотеками.",
+    "tags": ["react", "refs", "useRef"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-022",
+    "question": "Как типизировать компонент высшего порядка (HOC)?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nconst withLoading = <P extends object>(\n  Component: React.ComponentType<P>\n) => {\n  return (props: P & { isLoading: boolean }) => {\n    if (props.isLoading) return <div>Loading...</div>;\n    return <Component {...props} />;\n  };\n};\n```",
+    "answers": [
+      {
+        "text": "Нужно убрать isLoading из пропсов при spread",
+        "isCorrect": true
+      },
+      {
+        "text": "Нужно использовать React.FC вместо ComponentType",
+        "isCorrect": false
+      },
+      { "text": "Нужно добавить displayName для HOC", "isCorrect": false },
+      { "text": "Код правильный", "isCorrect": false }
+    ],
+    "explanation": "При spread операторе {...props} передаются все пропсы, включая isLoading, который оригинальный компонент может не ожидать. Нужно деструктурировать isLoading: const { isLoading, ...restProps } = props;",
+    "tags": ["react", "typescript", "hoc", "advanced"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-023",
+    "question": "Что такое Suspense и как он работает?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Механизм для обработки ошибок", "isCorrect": false },
+      {
+        "text": "API для отложенного рендера до загрузки данных",
+        "isCorrect": true
+      },
+      { "text": "Компонент для анимаций", "isCorrect": false },
+      {
+        "text": "Хук для управления состоянием загрузки",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Suspense позволяет компонентам «ждать» чего-либо (код, данные) перед рендером. Пока компонент в Suspense «завис», показывается fallback. В React 18 работает с Concurrent Features.",
+    "tags": ["react", "suspense", "react18", "concurrent"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/Suspense"
+  },
+  {
+    "id": "react-024",
+    "question": "Как правильно использовать useImperativeHandle?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Для создания публичных методов у функционального компонента",
+        "isCorrect": true
+      },
+      { "text": "Для импорта внешних библиотек", "isCorrect": false },
+      { "text": "Для оптимизации производительности", "isCorrect": false },
+      { "text": "Для обработки ошибок", "isCorrect": false }
+    ],
+    "explanation": "useImperativeHandle позволяет настраивать значение, которое предоставляется родительскому компоненту при использовании ref. Полезно для создания императивных API у функциональных компонентов.",
+    "tags": ["react", "hooks", "useImperativeHandle", "refs"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useImperativeHandle"
+  },
+  {
+    "id": "react-025",
+    "question": "Что такое Concurrent Features в React 18?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Возможность рендерить несколько версий UI одновременно",
+        "isCorrect": true
+      },
+      { "text": "Параллельная загрузка ресурсов", "isCorrect": false },
+      {
+        "text": "Одновременное использование useState и useReducer",
+        "isCorrect": false
+      },
+      { "text": "Многопоточность в JavaScript", "isCorrect": false }
+    ],
+    "explanation": "Concurrent Features — набор возможностей, позволяющих React прерывать длительные рендеры для обработки пользовательских событий, делая приложения более отзывчивыми.",
+    "tags": ["react", "react18", "concurrent", "performance"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/blog/2022/03/29/react-v18"
+  },
+  {
+    "id": "react-026",
+    "question": "Как типизировать стили в inline-style?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nconst styles: __________ = {\n  container: {\n    padding: '10px',\n    backgroundColor: '#fff',\n  },\n};\n```",
+    "answers": [
+      { "text": "CSSProperties", "isCorrect": false },
+      { "text": "React.CSSProperties", "isCorrect": true },
+      { "text": "Record<string, string>", "isCorrect": false },
+      { "text": "StyleObject", "isCorrect": false }
+    ],
+    "explanation": "React.CSSProperties предоставляет типы для всех допустимых CSS свойств, включая проверку значений (например, padding должен быть string | number).",
+    "tags": ["react", "typescript", "styling"],
+    "direction": "frontend",
+    "companies": ["yandex", "wb"],
+    "complexity": 1,
+    "isPublic": true
+  },
+  {
+    "id": "react-027",
+    "question": "Что делает хук useTransition?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Управляет CSS анимациями", "isCorrect": false },
+      {
+        "text": "Позволяет отложить неотложные обновления состояния",
+        "isCorrect": true
+      },
+      {
+        "text": "Синхронизирует состояние между вкладками",
+        "isCorrect": false
+      },
+      {
+        "text": "Управляет переходом между маршрутами",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "useTransition возвращает функцию startTransition и флаг isPending. Обновления состояния внутри startTransition помечаются как неотложные — React может прервать их для более важных обновлений.",
+    "tags": ["react", "hooks", "useTransition", "concurrent"],
+    "direction": "frontend",
+    "companies": ["tinkoff", "yandex"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useTransition"
+  },
+  {
+    "id": "react-028",
+    "question": "Как правильно использовать forwardRef с TypeScript?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ninterface ButtonProps {\n  children: React.ReactNode;\n}\n\nconst Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {\n  return <button ref={ref}>{props.children}</button>;\n});\n```",
+    "answers": [
+      { "text": "Нужно добавить displayName", "isCorrect": false },
+      { "text": "Нужно указать тип для props", "isCorrect": false },
+      { "text": "Код правильный", "isCorrect": true },
+      { "text": "Нужно использовать React.forwardRef", "isCorrect": false }
+    ],
+    "explanation": "Код правильный. Первый generic параметр forwardRef — тип рефа (HTMLButtonElement), второй — тип пропсов. ref автоматически типизирован.",
+    "tags": ["react", "forwardRef", "typescript"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-029",
+    "question": "Что такое Error Boundaries и как их создать?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Компоненты, перехватывающие ошибки JavaScript в дочерних компонентах",
+        "isCorrect": true
+      },
+      {
+        "text": "Границы для обработки сетевых ошибок",
+        "isCorrect": false
+      },
+      { "text": "Механизм валидации пропсов", "isCorrect": false },
+      {
+        "text": "API для обработки ошибок в useEffect",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Error Boundaries — классовые компоненты с методами getDerivedStateFromError или componentDidCatch. Они перехватывают ошибки в дочерних компонентах и показывают fallback UI.",
+    "tags": ["react", "error-boundaries", "error-handling"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary"
+  },
+  {
+    "id": "react-030",
+    "question": "Какой тип использовать для компонента в TypeScript?",
+    "questionType": "text",
+    "answers": [
+      { "text": "React.FC (FunctionComponent)", "isCorrect": false },
+      { "text": "React.ComponentType", "isCorrect": false },
+      {
+        "text": "Любой из вариантов в зависимости от ситуации",
+        "isCorrect": true
+      },
+      { "text": "React.ElementType", "isCorrect": false }
+    ],
+    "explanation": "React.FC удобен для простых компонентов (автоматически включает children), но может быть излишним. React.ComponentType подходит для HOC. В современной практике часто используют просто функцию с явной типизацией пропсов.",
+    "tags": ["react", "typescript", "components"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-031",
+    "question": "Что такое render props паттерн?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Передача компонента как пропса", "isCorrect": false },
+      {
+        "text": "Передача функции как пропса, которая возвращает React элемент",
+        "isCorrect": true
+      },
+      { "text": "Рендер компонента по условию", "isCorrect": false },
+      { "text": "Оптимизация рендера через пропсы", "isCorrect": false }
+    ],
+    "explanation": "Render props — паттерн, когда компонент принимает функцию как пропс (часто называемую render) и вызывает её для рендера контента. Альтернатива HOC для переиспользования логики.",
+    "tags": ["react", "patterns", "render-props"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-032",
+    "question": "Найдите ошибку в оптимизации компонента",
+    "questionType": "find_bug",
+    "codeSnippet": "```typescript\nconst ExpensiveComponent = React.memo(({ data, onClick }) => {\n  // Дорогие вычисления\n  return <div onClick={onClick}>{data.value}</div>;\n});\n\nconst Parent = () => {\n  const [state, setState] = useState({ value: 1 });\n  const handleClick = () => console.log('click');\n  \n  return <ExpensiveComponent data={state} onClick={handleClick} />;\n};\n```",
+    "answers": [
+      { "text": "Нет ошибки", "isCorrect": false },
+      {
+        "text": "handleClick создаётся заново при каждом рендере",
+        "isCorrect": true
+      },
+      {
+        "text": "Нужно использовать useMemo для data",
+        "isCorrect": false
+      },
+      { "text": "React.memo лишний", "isCorrect": false }
+    ],
+    "explanation": "Функция handleClick создаётся заново при каждом рендере Parent, поэтому onClick пропс всегда изменяется, и React.memo не работает. Нужно использовать useCallback.",
+    "tags": ["react", "memo", "performance", "useCallback"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-033",
+    "question": "Как типизировать кастомный хук?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nconst useCounter = (initialValue: number = 0) => {\n  const [count, setCount] = useState(initialValue);\n  \n  const increment = () => setCount(c => c + 1);\n  const decrement = () => setCount(c => c - 1);\n  \n  return { count, increment, decrement };\n};\n```",
+    "answers": [
+      { "text": "Нужно указать возвращаемый тип", "isCorrect": false },
+      {
+        "text": "Нужно добавить useCallback для increment/decrement",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": true },
+      {
+        "text": "Нужно использовать useMemo для возвращаемого объекта",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "TypeScript выводит возвращаемый тип автоматически. Код правильный, хотя на практике могут добавить useCallback и useMemo для оптимизации, если хук будет использоваться в мемоизированных компонентах.",
+    "tags": ["react", "hooks", "typescript", "custom-hooks"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-034",
+    "question": "Что такое Server Components в React?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Компоненты, рендерящиеся только на сервере",
+        "isCorrect": false
+      },
+      {
+        "text": "Компоненты, которые могут рендериться и на сервере, и на клиенте",
+        "isCorrect": true
+      },
+      { "text": "Компоненты для SSR", "isCorrect": false },
+      { "text": "Бэкенд API для React", "isCorrect": false }
+    ],
+    "explanation": "Server Components — компоненты, которые рендерятся только на сервере, не отправляют JavaScript на клиент, могут напрямую работать с БД и имеют доступ к серверным ресурсам.",
+    "tags": ["react", "react18", "server-components", "nextjs"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+  },
+  {
+    "id": "react-035",
+    "question": "Как обработать форму в управляемом компоненте?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nconst Form = () => {\n  const [form, setForm] = useState({ email: '', password: '' });\n  \n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    setForm(prev => ({\n      ...prev,\n      [e.target.name]: e.target.value\n    }));\n  };\n  \n  return (\n    <form>\n      <input name=\"email\" value={form.email} onChange={handleChange} />\n      <input name=\"password\" value={form.password} onChange={handleChange} />\n    </form>\n  );\n};\n```",
+    "answers": [
+      {
+        "text": "Нужно добавить type='password' для второго инпута",
+        "isCorrect": false
+      },
+      {
+        "text": "Нужно использовать useReducer вместо useState",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": true },
+      {
+        "text": "Нужно обернуть handleChange в useCallback",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Код демонстрирует правильный паттерн управляемого компонента с универсальным обработчиком изменений. Для production можно добавить валидацию и useCallback при необходимости.",
+    "tags": ["react", "forms", "controlled-components"],
+    "direction": "frontend",
+    "companies": ["yandex", "wb"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-036",
+    "question": "Что такое код-сплиттинг и как его реализовать?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Разделение кода на несколько бандлов для lazy loading",
+        "isCorrect": true
+      },
+      {
+        "text": "Разделение компонентов на мелкие функции",
+        "isCorrect": false
+      },
+      { "text": "Стиль написания кода в React", "isCorrect": false },
+      {
+        "text": "Оптимизация размера бандла через tree shaking",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Код-сплиттинг реализуется через dynamic import() с React.lazy() или в Next.js через dynamic(). Позволяет загружать части приложения по требованию, уменьшая начальный бандл.",
+    "tags": ["react", "performance", "code-splitting", "lazy"],
+    "direction": "frontend",
+    "companies": ["tinkoff", "yandex"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-037",
+    "question": "Как типизировать реф для кастомного компонента?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ninterface InputProps {\n  value: string;\n}\n\ninterface InputRef {\n  focus: () => void;\n  clear: () => void;\n}\n\nconst Input = forwardRef<InputRef, InputProps>((props, ref) => {\n  // implementation\n});\n```",
+    "answers": [
+      {
+        "text": "Нужно использовать useImperativeHandle",
+        "isCorrect": true
+      },
+      {
+        "text": "Нужно указать HTMLInputElement вместо InputRef",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": false },
+      { "text": "Нужно добавить defaultProps", "isCorrect": false }
+    ],
+    "explanation": "Типизация forwardRef корректна, но чтобы реф действительно имел методы focus и clear, нужно использовать useImperativeHandle внутри компонента.",
+    "tags": ["react", "typescript", "forwardRef", "useImperativeHandle"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-038",
+    "question": "Что такое React Server Actions?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Асинхронные функции, выполняющиеся на сервере",
+        "isCorrect": true
+      },
+      {
+        "text": "Методы жизненного цикла серверных компонентов",
+        "isCorrect": false
+      },
+      {
+        "text": "Действия для управления состоянием на сервере",
+        "isCorrect": false
+      },
+      { "text": "API для SSR в Next.js", "isCorrect": false }
+    ],
+    "explanation": "Server Actions — асинхронные функции, выполняющиеся на сервере. Могут вызываться из клиентских компонентов для мутации данных, работают без создания API endpoints.",
+    "tags": ["react", "nextjs", "server-actions", "react19"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions"
+  },
+  {
+    "id": "react-039",
+    "question": "Как создать кастомный хук для подписки на события?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nconst useEventListener = (\n  eventName: string,\n  handler: (event: Event) => void,\n  element: HTMLElement = window\n) => {\n  useEffect(() => {\n    element.addEventListener(eventName, handler);\n    return () => element.removeEventListener(eventName, handler);\n  }, [eventName, handler, element]);\n};\n```",
+    "answers": [
+      {
+        "text": "Нужно обернуть handler в useCallback",
+        "isCorrect": true
+      },
+      {
+        "text": "Нужно использовать useRef для element",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": false },
+      {
+        "text": "Нужно добавить проверку на существование element",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "handler должен быть мемоизирован через useCallback, иначе при каждом рендере будет создаваться новая функция, приводя к постоянной отписке/подписке.",
+    "tags": ["react", "hooks", "custom-hooks", "events"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-040",
+    "question": "Что такое Compound Components паттерн?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Группа компонентов, работающих вместе через контекст",
+        "isCorrect": true
+      },
+      {
+        "text": "Компоненты с одинаковым интерфейсом",
+        "isCorrect": false
+      },
+      { "text": "Наследование компонентов", "isCorrect": false },
+      {
+        "text": "Компоненты, объединённые в библиотеку",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Compound Components — паттерн, где несколько компонентов разделяют состояние через контекст. Пример: Tabs, TabList, Tab, TabPanels, TabPanel в Reach UI/Chakra UI.",
+    "tags": ["react", "patterns", "compound-components", "context"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-041",
+    "question": "Как типизировать children с определённой структурой?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ninterface CardProps {\n  children: [React.ReactElement<HeaderProps>, React.ReactElement<BodyProps>];\n}\n\nconst Card = ({ children }: CardProps) => {\n  const [header, body] = children;\n  return (\n    <div>\n      <div>{header}</div>\n      <div>{body}</div>\n    </div>\n  );\n};\n```",
+    "answers": [
+      {
+        "text": "Нужно использовать React.Children.toArray",
+        "isCorrect": false
+      },
+      {
+        "text": "Нужно добавить проверку на тип children",
+        "isCorrect": true
+      },
+      { "text": "Код правильный", "isCorrect": false },
+      {
+        "text": "Нужно использовать Fragment вместо массива",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "TypeScript не гарантирует структуру children в runtime. Нужно добавить проверку: if (!React.isValidElement(header) || header.type !== Header) и т.д.",
+    "tags": ["react", "typescript", "children", "props"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-042",
+    "question": "Что такое useDeferredValue и когда его использовать?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Хук для отложенного обновления значения",
+        "isCorrect": true
+      },
+      { "text": "Хук для кэширования вычислений", "isCorrect": false },
+      { "text": "Хук для работы с промисами", "isCorrect": false },
+      {
+        "text": "Хук для отложенной загрузки ресурсов",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "useDeferredValue принимает значение и возвращает его отложенную версию, которая «отстаёт» от оригинального значения. Полезно для отзывчивости при быстром вводе в инпут.",
+    "tags": ["react", "hooks", "useDeferredValue", "concurrent"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/reference/react/useDeferredValue"
+  },
+  {
+    "id": "react-043",
+    "question": "Как создать темизацию (theming) в приложении?",
+    "questionType": "text",
+    "answers": [
+      { "text": "Через CSS переменные и контекст", "isCorrect": false },
+      {
+        "text": "Через Styled Components или Emotion",
+        "isCorrect": false
+      },
+      {
+        "text": "Через CSS-in-JS библиотеки с поддержкой тем",
+        "isCorrect": false
+      },
+      {
+        "text": "Любой из вариантов в зависимости от стека",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Темизацию можно реализовать разными способами: CSS переменные + React Context, CSS-in-JS библиотеки (Styled Components, Emotion), или даже через Tailwind с кастомными классами.",
+    "tags": ["react", "theming", "css", "context"],
+    "direction": "frontend",
+    "companies": ["wb", "t-bank"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-044",
+    "question": "Как типизировать reducer с payload?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ntype Action = \n  | { type: 'increment'; payload: number }\n  | { type: 'decrement'; payload: number }\n  | { type: 'reset' };\n```",
+    "answers": [
+      {
+        "text": "Нужно использовать interface вместо type",
+        "isCorrect": false
+      },
+      {
+        "text": "Нужно сделать payload опциональным для reset",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": true },
+      {
+        "text": "Нужно добавить default case в reducer",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Discriminated union types — правильный способ типизировать actions в TypeScript. TypeScript будет проверять наличие payload в зависимости от type.",
+    "tags": ["react", "typescript", "reducer", "discriminated-union"],
+    "direction": "frontend",
+    "companies": ["yandex", "tinkoff"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-045",
+    "question": "Что такое React Forget?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Новый компилятор для автоматической мемоизации",
+        "isCorrect": true
+      },
+      { "text": "Хук для очистки памяти", "isCorrect": false },
+      { "text": "Инструмент для tree shaking", "isCorrect": false },
+      {
+        "text": "Библиотека для управления состоянием",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "React Forget — компилятор, который автоматически мемоизирует компоненты и значения, устраняя необходимость вручную использовать useMemo, useCallback, React.memo.",
+    "tags": ["react", "react19", "compiler", "performance"],
+    "direction": "frontend",
+    "companies": ["t-bank", "wb"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-046",
+    "question": "Как обрабатывать ошибки в async функциях в useEffect?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nuseEffect(() => {\n  const fetchData = async () => {\n    try {\n      const res = await fetch('/api');\n      const data = await res.json();\n      setData(data);\n    } catch (error) {\n      // Обработка ошибки\n    }\n  };\n  \n  fetchData();\n}, []);\n```",
+    "answers": [
+      {
+        "text": "Нужно добавить .catch() к fetchData()",
+        "isCorrect": false
+      },
+      {
+        "text": "Нужно использовать useErrorBoundary",
+        "isCorrect": false
+      },
+      { "text": "Код правильный", "isCorrect": true },
+      {
+        "text": "Нужно вынести fetchData из useEffect",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Код правильно обрабатывает ошибки через try/catch внутри асинхронной функции. Дополнительно можно добавить состояние для ошибки и отображать её в UI.",
+    "tags": ["react", "hooks", "useEffect", "error-handling", "async"],
+    "direction": "frontend",
+    "companies": ["yandex", "wb"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-047",
+    "question": "Как создать кастомный хук для отслеживания размеров окна?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\nconst useWindowSize = () => {\n  const [size, setSize] = useState({ width: 0, height: 0 });\n  \n  useEffect(() => {\n    const handleResize = () => {\n      setSize({ width: window.innerWidth, height: window.innerHeight });\n    };\n    \n    window.addEventListener('resize', handleResize);\n    handleResize(); // Initial call\n    \n    return () => window.removeEventListener('resize', handleResize);\n  }, []);\n  \n  return size;\n};\n```",
+    "answers": [
+      {
+        "text": "Нужно обернуть handleResize в useCallback",
+        "isCorrect": true
+      },
+      { "text": "Нужно использовать useLayoutEffect", "isCorrect": false },
+      { "text": "Код правильный", "isCorrect": false },
+      {
+        "text": "Нужно добавить throttle для handleResize",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "handleResize создаётся заново при каждом рендере. Хотя в данном случае массив зависимостей пуст, useCallback улучшает читаемость и защищает от будущих изменений.",
+    "tags": ["react", "hooks", "custom-hooks", "resize"],
+    "direction": "frontend",
+    "companies": ["t-bank", "tinkoff"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-048",
+    "question": "Что такое Hydration в Next.js/React?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Процесс «оживления» статического HTML React компонентами",
+        "isCorrect": true
+      },
+      { "text": "Загрузка данных с сервера", "isCorrect": false },
+      { "text": "Кэширование компонентов", "isCorrect": false },
+      { "text": "Оптимизация гидратации CSS", "isCorrect": false }
+    ],
+    "explanation": "Hydration — процесс, когда React «оживляет» статический HTML, полученный с сервера, добавляя обработчики событий и делая его интерактивным. Hydration mismatch возникает когда HTML сервера и клиента различаются.",
+    "tags": ["react", "nextjs", "ssr", "hydration"],
+    "direction": "frontend",
+    "companies": ["yandex", "wb"],
+    "complexity": 3,
+    "isPublic": true
+  },
+  {
+    "id": "react-049",
+    "question": "Как типизировать компонент с defaultProps?",
+    "questionType": "code",
+    "codeSnippet": "```typescript\ninterface ButtonProps {\n  size?: 'small' | 'medium' | 'large';\n  children: React.ReactNode;\n}\n\nconst Button = ({ size = 'medium', children }: ButtonProps) => {\n  return <button className={`btn-${size}`}>{children}</button>;\n};\n```",
+    "answers": [
+      {
+        "text": "Нужно использовать defaultProps свойство",
+        "isCorrect": false
+      },
+      { "text": "Код правильный (современный подход)", "isCorrect": true },
+      { "text": "Нужно сделать size обязательным", "isCorrect": false },
+      { "text": "Нужно добавить Button.defaultProps", "isCorrect": false }
+    ],
+    "explanation": "Современный подход — использовать значения по умолчанию в деструктуризации. defaultProps устарел для функциональных компонентов, особенно с TypeScript.",
+    "tags": ["react", "typescript", "props", "default-props"],
+    "direction": "frontend",
+    "companies": ["tinkoff", "t-bank"],
+    "complexity": 2,
+    "isPublic": true
+  },
+  {
+    "id": "react-050",
+    "question": "Что такое React 19 и основные нововведения?",
+    "questionType": "text",
+    "answers": [
+      {
+        "text": "Только улучшения производительности",
+        "isCorrect": false
+      },
+      {
+        "text": "Action States, useOptimistic, useFormStatus и др.",
+        "isCorrect": true
+      },
+      { "text": "Полная переработка хуков", "isCorrect": false },
+      { "text": "Новый синтаксис JSX", "isCorrect": false }
+    ],
+    "explanation": "React 19 добавляет: хуки для форм (useActionState, useFormStatus, useOptimistic), поддержку метаданных, улучшения Ref, контекстные хуки, и готовит почву для React Forget.",
+    "tags": ["react", "react19", "new-features"],
+    "direction": "frontend",
+    "companies": ["yandex", "wb", "tinkoff", "t-bank"],
+    "complexity": 3,
+    "isPublic": true,
+    "source": "https://react.dev/blog/2024/04/25/react-19"
+  }
+]
