@@ -25,3 +25,11 @@ export interface ResultModalProps {
   onContinue: () => void;
 }
 
+export interface QuizFlowProps {
+  /**
+   * Позволяет передать собственный набор карточек (например, для тестов).
+   * По умолчанию используется общий список из shared/constants.
+   */
+  initialCards?: Card[];
+}
+
