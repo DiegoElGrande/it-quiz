@@ -1,1 +1,1 @@
-export { QuizFlow } from './ui/quiz-flow';
+export { QuizCard } from './ui/quiz-card';

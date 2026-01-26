@@ -33,3 +33,37 @@ export interface Card {
     repetitionCount: number; // сколько раз уже повторяли
   }[];
 }
+
+export interface QuizCardProps {
+  card: Card;
+  onAnswer: (isCorrect: boolean) => void;
+  onContinue: () => void;
+}
+
+export interface QuestionDisplayProps {
+  question: string;
+  questionType: 'text' | 'code' | 'find_bug';
+  codeSnippet?: string;
+}
+
+export interface AnswerOptionsProps {
+  answers: Array<{ text: string; isCorrect: boolean }>;
+  selectedAnswerIndex: number | null;
+  showModal: boolean;
+  onAnswerSelect: (index: number) => void;
+  onAnswerConfirm: (index: number, isCorrect: boolean) => void;
+}
+
+export interface ResultModalProps {
+  isCorrect: boolean;
+  explanation: string;
+  onContinue: () => void;
+}
+
+export interface QuizFlowProps {
+  initialCards?: Card[];
+}
+
+export interface CodeAreaProps {
+  code: string;
+}

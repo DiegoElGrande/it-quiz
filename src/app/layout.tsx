@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
-        <main className="m-4 flex-1 flex justify-center items-center">
+        <main className="flex-1 flex justify-center items-center">
           {children}
         </main>
         <Navigation />

@@ -1,4 +1,4 @@
-import type { ResultModalProps } from '../model/types';
+import type { ResultModalProps } from '@/shared/types/card.types';
 
 export function ResultModal({
   isCorrect,

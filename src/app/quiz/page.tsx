@@ -1,4 +1,4 @@
-import { QuizFlow } from '@/entities/quiz-card';
+import { QuizFlow } from '@/widgets/';
 
 export default function QuizPage() {
   return <QuizFlow />;
