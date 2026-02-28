@@ -16,46 +16,40 @@ interface UseQuizFlowReturn {
   handleAnswer: (isCorrect: boolean) => void;
   handleContinue: () => void;
   handleRestart: () => void;
+  countQuestions: number;
 }
 
-export function useQuizFlow(initialCards?: Card[]): UseQuizFlowReturn {
-  const [cards] = useState<Card[]>(() =>
-    initialCards ? initialCards : (quizData as Card[]),
-  );
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState<Score>({ correct: 0, total: 0 });
+export function useQuizFlow(): UseQuizFlowReturn {
+  const [cards] = useState(quizData as Card[]);
+  const [currentIndex, setCurrentIndex] = useState<number>(+localStorage.cardIndex || 0);
   const [isFinished, setIsFinished] = useState(false);
 
+  const countQuestions = cards.length
   const currentCard = cards[currentIndex];
 
-  const handleAnswer = (isCorrect: boolean) => {
-    setScore((prev) => ({
-      correct: isCorrect ? prev.correct + 1 : prev.correct,
-      total: prev.total + 1,
-    }));
-  };
+
 
   const handleContinue = () => {
     if (currentIndex < cards.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
+      setCurrentIndex(prev => prev + 1);
+      localStorage.cardIndex = currentIndex;
     } else {
       setIsFinished(true);
+      localStorage.removeItem('cardIndex')
     }
   };
 
   const handleRestart = () => {
     setCurrentIndex(0);
-    setScore({ correct: 0, total: 0 });
     setIsFinished(false);
   };
 
   return {
     cards,
     currentIndex,
-    score,
+    countQuestions,
     isFinished,
     currentCard,
-    handleAnswer,
     handleContinue,
     handleRestart,
   };
