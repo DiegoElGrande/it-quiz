@@ -1,6 +1,6 @@
 export { AnswerOptions } from './answer-options';
-export { QuestionDisplay } from './question-display';
+export { Badge } from './badge';
+export { Button } from './button';
 export { CodeArea } from './code-area';
-export { ProgressBar } from './progress-bar/';
-export { QuizCompletion } from './quiz-completion/';
-export { ResultModal } from './result-modal/';
+export { QuestionDisplay } from './questios-display';
+export { ResultStatus } from './result-status';

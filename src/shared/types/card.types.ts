@@ -1,63 +1,39 @@
+import type { Dispatch, SetStateAction } from 'react';
+
 type Answer = {
   text: string;
   isCorrect: boolean;
 };
+
 export interface Card {
-  id: string; // UUID
-  // Контент
-  question: string;
-  questionType: 'text' | 'code' | 'find_bug'; // Тип для рендеринга
-  codeSnippet?: string; // Markdown/код, если нужен
-  imageUrl?: string;
-  // Варианты ответа
-  answers: Answer[]; // Массив объектов { id, text, isCorrect }
+  id: number;
+  question: string; // Вопрос
+  codeSnippet?: string; // без разметки markdown
+  answers: Answer[]; // Массив из 6 объектов { id, text, isCorrect }
   explanation: string; // Пояснение после ответа - ОЧЕНЬ ВАЖНО!
-
-  // Метаданные для организации
-  tags: string[]; // ["react", "hooks", "useState"]
-  direction: 'frontend' | 'backend' | 'devops' | 'algorithms'; // или enum
-  companies: string[]; // ["t-bank", "wb", "yandex"]
-  complexity: 1 | 2 | 3; // Сложность (для алгоритма SRS)
-
-  // Системные поля
-  authorId?: string; // Если есть пользовательский контент
-  isPublic: boolean; // Флаг публичной карточки из банка
-  source?: string; // Источник (ссылка на MDN и т.д.)
-
-  // Статистика и SRS (будут обновляться для КАЖДОГО пользователя отдельно!)
-  userStatistics?: {
-    userId: string;
-    interval: number; // дней до следующего показа
-    easeFactor: number; // множитель сложности (как в SM-2)
-    dueDate: Date; // когда показывать следующй раз
-    repetitionCount: number; // сколько раз уже повторяли
-  }[];
 }
 
 export interface QuizCardProps {
   card: Card;
-  onAnswer: (isCorrect: boolean) => void;
-  onContinue: () => void;
+  setCurrentIndex: Dispatch<SetStateAction<number>>;
 }
 
 export interface QuestionDisplayProps {
   question: string;
-  questionType: 'text' | 'code' | 'find_bug';
   codeSnippet?: string;
 }
 
 export interface AnswerOptionsProps {
-  answers: Array<{ text: string; isCorrect: boolean }>;
-  selectedAnswerIndex: number | null;
-  showModal: boolean;
-  onAnswerSelect: (index: number) => void;
-  onAnswerConfirm: (index: number, isCorrect: boolean) => void;
+  variantsAnswers: Array<{ text: string; isCorrect: boolean }>;
+  selectIndex: number | null;
 }
 
 export interface ResultModalProps {
-  isCorrect: boolean;
-  explanation: string;
-  onContinue: () => void;
+  isCorrect?: boolean;
+  explanation?: string | null;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
+  setCurrentIndex: Dispatch<SetStateAction<number>>;
+  setSelectedAnswerIndex: Dispatch<SetStateAction<number | null>>;
 }
 
 export interface QuizFlowProps {
